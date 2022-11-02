@@ -1,7 +1,7 @@
 from django.db import models
+from Ausbilder_Tool import settings
 
-
-class department(models.Model):
+class Profession(models.Model):
     name = models.CharField(max_length=30)
 
     def __str__(self) -> str:
@@ -9,7 +9,7 @@ class department(models.Model):
 
   
 class Azubi(models.Model):
-    topic = models.ForeignKey(department, on_delete=models.CASCADE)
+    topic = models.ForeignKey(Profession, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     email = models.EmailField(max_length=30)
