@@ -11,8 +11,18 @@ def azubi_list(request):
 class list_of_Azubis(ListView):
     model = AzubiData
 
+class list_of_Azubis2(ListView):
+    queryset = AzubiData.objects.all()
+    template_name = 'home.html'
+
+def frame(request):
+    return render(request, "test.html")
+
 
 def detail_page(request, id):
     obj = get_object_or_404(AzubiData, pk=id)
     return render(request, "detail.html", {"obj": obj})
 
+class AzubiDetail(DetailView):
+    queryset = AzubiData.objects.all()
+    template_name = 'detail.html'

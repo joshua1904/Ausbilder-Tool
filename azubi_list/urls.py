@@ -1,10 +1,11 @@
 from django.urls import path
 
-from azubi_list.views import list_of_Azubis, detail_page
+from azubi_list.views import AzubiDetail, list_of_Azubis, detail_page, frame, list_of_Azubis2
 
 
 
 urlpatterns = [
-    path("test/", list_of_Azubis.as_view(), name="test"),
-    path("<int:id>", detail_page, name="detail")
+    path('', list_of_Azubis.as_view(), name="test"),
+    path('<int:pk>', AzubiDetail.as_view(), name="detail"),
+    path("frame", frame),
 ]

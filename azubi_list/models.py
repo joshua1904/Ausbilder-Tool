@@ -16,6 +16,7 @@ class AzubiData(models.Model):
     last_name = models.CharField(max_length=32)
     email = models.CharField(max_length=32)
     birthday = models.CharField(max_length=32, default="Leer")
+    phone_number = models.CharField(max_length=32, default="Leer")
 
 
     def __str__(self):

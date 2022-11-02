@@ -14,8 +14,12 @@
     <title>Document</title>
 </head>
 <h1>Azubis</h1>
-
 <body>
+  <div>
+    <h1>Block Content</h1>
+    { %block content %}
+    { % endblock %}
+  </div>
         <div>
             {% for azubi in object_list %}
             <div class="card" style="width: 18rem;">
@@ -27,9 +31,11 @@
               </div>
             {% endfor %}
         </div>
-        <a class="btn btn-primary btn-lg" href="{% url 'test2' %}" role="">Anderes Beispiel</a>
+    
+
          
 </body>
+
 </html>
 
 
