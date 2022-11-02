@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "azubi_list"
+    "azubi_list.apps.AzubiListConfig",
 ]
 
 MIDDLEWARE = [
