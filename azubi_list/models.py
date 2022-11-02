@@ -16,6 +16,7 @@ class Azubi(models.Model):
     birthday = models.DateField()
     department = models.CharField(max_length=30)
     year = models.IntegerField()
+    phone_number = models.CharField(max_length=30)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
