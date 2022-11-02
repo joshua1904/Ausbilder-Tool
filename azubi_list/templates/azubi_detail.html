@@ -17,5 +17,22 @@
           <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
         </p>
       </div>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Azubis</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for azubi in azubis %}
+      <tr>
+        <td><a href="{% url 'detail' azubi.id %}">{{ azubi.first_name }} {{azubi.last_name}}</a></td>
+      </tr>
+      
+      {% endfor %}
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>
