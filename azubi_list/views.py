@@ -1,6 +1,8 @@
 from django.shortcuts import render
-
+from django.views.generic import ListView
+from .models import Azubi
 # Create your views here.
 
-def azubi_list(request):
-    return render(request, "azubi_list.html")
+class Azubi_List(ListView):
+    model = Azubi
+    template_name = "home.html"
