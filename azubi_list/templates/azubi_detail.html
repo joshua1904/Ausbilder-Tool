@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
 <body>
   <div class="row">
     
-    <div class="col-lg-2"  style="overflow-y: scroll; height: 100%;">
+    <div class="col-lg-2"  style="overflow-y: scroll; height: 100vh;">
 
       <table class="table table-striped" >
         <thead>
@@ -21,7 +22,7 @@
         <tbody>
           {% for azubi in azubis %}
           <tr>
-            <td><a href="{% url 'detail' azubi.id %}">{{ azubi.first_name }} {{azubi.last_name}}</a></td>
+            <td><a href="{% url 'detail' azubi.id %}">{{ azubi.first_name }} {{azubi.last_name}}  </a><a href="mailto:{{azubi.email}}"><img style="float: right", src="{% static 'images/mail.png' %}" withd=20, height= 20 alt="My image"></a></td>
           </tr>
           {% endfor %}
           </tr>
@@ -46,9 +47,6 @@
      
     </div>
   </div>
- 
-   
-      
   
 </body>
 </html>
