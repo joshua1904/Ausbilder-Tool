@@ -8,11 +8,14 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
-<body>
-  <div class="row">
-    
-    <div class="col-lg-2"  style="overflow-y: scroll; height: 100vh;">
 
+<body>
+
+
+  <div class="row">
+
+    <div class="col-lg-2"  style="overflow-y: scroll; height: 100vh;">
+     
       <table class="table table-striped" >
         <thead>
           <tr>
@@ -22,7 +25,7 @@
         <tbody>
           {% for azubi in azubis %}
           <tr>
-            <td><a href="{% url 'detail' azubi.id %}">{{ azubi.first_name }} {{azubi.last_name}}  </a><a href="mailto:{{azubi.email}}"><img style="float: right", src="{% static 'images/mail.png' %}" withd=20, height= 20 alt="My image"></a></td>
+            <td><a href="{% url 'detail' filter=filter id=azubi.id  %}">{{ azubi.first_name }} {{azubi.last_name}} {{azubi.topic}}  </a><a href="mailto:{{azubi.email}}"><img style="float: right", src="{% static 'images/mail.png' %}" withd=20, height= 20 alt="My image"></a></td>
           </tr>
           {% endfor %}
           </tr>
@@ -44,9 +47,9 @@
       {%else%}
       {% include 'include/no_azubi_detail.html' %}
       {%endif%}
-     
+      
     </div>
   </div>
-  
+
 </body>
 </html>
