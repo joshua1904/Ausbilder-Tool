@@ -1,9 +1,8 @@
 
-from django.urls import path, include
-from .views import Azubi_List,detail_page
+from django.urls import path
+from .views import detail_page, homepage
 
 urlpatterns = [
-    path("", Azubi_List.as_view(), name='azubi_list'),
-    #path('<int:id>', detail_page, name="detail"),
+    path("", homepage, name='azubi_list'),
     path('<int:id>/', detail_page, name="detail")
 ]
