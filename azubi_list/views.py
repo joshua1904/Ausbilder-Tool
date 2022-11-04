@@ -19,11 +19,9 @@ def homepage(request, filter: str):
         return render(request, "azubi_detail.html", {"azubis": final_list, "obj": final_list[0], "professions": professions, "filter": filter})
     return render(request, "azubi_detail.html", {"azubis": azubis,"professions": professions, "filter": filter})
 
-def get_filter(filter: str, azubis):
+def get_filter(profession_filter: str, azubis):
     final_list = list()
-    for azubi in azubis:
-        if azubi.topic.name == filter:
-            final_list.append(azubi)
-    if filter == "all":
+    final_list = list(filter(lambda x: x.topic.name == profession_filter, azubis))
+    if profession_filter == "all":
         final_list = azubis
     return final_list
