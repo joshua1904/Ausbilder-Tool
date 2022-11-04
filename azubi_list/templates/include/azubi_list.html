@@ -1,0 +1,49 @@
+{% load static %}
+<table class="table table-striped" >
+    <thead>
+      <tr>
+        <th scope="col">Azubis 
+          <div class="dropdown" style="float:right;">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Filter
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="filter">
+              <li><a href="{% url 'azubi_list' filter='all'  %}">Alle</li>
+              {% for profession in professions %}
+              <li><a href="{% url 'azubi_list' filter=profession  %}">{{profession.name}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        
+
+          <!-- jQuery library -->
+          <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+          <!-- Bootstrap JS -->
+          <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+          
+          <!-- Initialize Bootstrap functionality -->
+          <script>
+          // Initialize tooltip component
+          $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+          })
+          
+          // Initialize popover component
+          $(function () {
+            $('[data-toggle="popover"]').popover()
+          })
+          </script>
+
+
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for azubi in azubis %}
+      <tr>
+        <td><a href="{% url 'detail' filter=filter id=azubi.id  %}">{{ azubi.first_name }} {{azubi.last_name}} {{azubi.topic}}  </a><a href="mailto:{{azubi.email}}"><img style="float: right", src="{% static 'images/mail.png' %}" withd=20, height= 20 alt="My image"></a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
