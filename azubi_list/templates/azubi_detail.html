@@ -8,9 +8,46 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 </head>
 
+<style>
+  body { 
+    display: grid;
+    grid-template-areas: 
+      "nav header"
+      "nav article"
+      "footer footer";
+    grid-template-rows: 60px 1fr 60px;
+    grid-template-columns: 20% 1fr 15%;
+    grid-gap: 10px;
+    height: 100vh;
+    margin: 0;
+    }
+  header, footer, article, nav, div {
+    padding: 20px;
+    background: gold;
+  }
+  #pageHeader {
+    grid-area: header;
+  }
+  #pageFooter {
+    grid-area: footer;
+  }
+  #mainArticle { 
+    grid-area: article;      
+    }
+  #mainNav { 
+    grid-area: nav; 
+    }
+  #siteAds { 
+    grid-area: ads; 
+    }
+  </style>
+
 <body>
 
-  
+  <header id="pageHeader">Header</header>
+  <article id="mainArticle">Article</article>
+  <nav id="mainNav">Nav</nav>
+  <footer id="pageFooter">Footer</footer>
 
   <div class="row">
 
@@ -19,8 +56,73 @@
       {% include 'include/azubi_list.html' %}
 
     </div>
+    
     <div class="col-lg-10">
       {% include 'include/azubi_detail_view.html' %}
+    </div>
+    <div class="col-lg-8">
+       
+
+    
+        <div class="col-md-8">
+
+
+              
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Full Name</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  Kenneth Valdez
+                </div>
+              </div>
+
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Email</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  fip@jukmuh.al
+                </div>
+              </div>
+
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Phone</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  (239) 816-9029
+                </div>
+              </div>
+
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Mobile</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  (320) 380-4539
+                </div>
+              </div>
+
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Address</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  Bay Area, San Francisco, CA
+                </div>
+              </div>
+
+              <hr>
+            </div>
+          </div>
+    
+    
+      </div>
   </div>
 
 </body>
