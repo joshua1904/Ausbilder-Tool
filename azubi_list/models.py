@@ -14,6 +14,8 @@ class Azubi(models.Model):
     last_name = models.CharField(max_length=30)
     email = models.EmailField(max_length=30)
     birthday = models.DateField()
+    # address = models.CharField(max_length=30, default= " ")
+    # PLZ = models.CharField(max_length=20, default = " ")
     department = models.CharField(max_length=30)
     year = models.IntegerField()
     phone_number = models.CharField(max_length=30)
