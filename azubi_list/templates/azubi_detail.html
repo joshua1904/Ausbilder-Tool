@@ -18,7 +18,7 @@
       "nav head_article head_article"
       "nav main_article main_article";
     grid-template-rows: auto;
-    grid-template-columns: 14%;
+    grid-template-columns: 12%;
     grid-gap: 2px;
     height: 100%;
     margin: 0;
@@ -47,7 +47,12 @@
 
 <body>
 
-  <header id="pageHeader">Header</header>
+  <header id="pageHeader"><form class="d-flex" method=POST action="{% url  'azubi_list'  filter='all' %}">
+    {% csrf_token %}
+    <input type="search" label="search" name="azubi_search_input">
+    <buton type="submit">Search</buton>
+  </form>
+  {{search}}</header>
 
   <nav id="mainNav">
     {% include 'include/azubi_list.html' %}
