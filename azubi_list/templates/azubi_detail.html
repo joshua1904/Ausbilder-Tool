@@ -47,11 +47,7 @@
 
 <body>
 
-  <header id="pageHeader"><form class="d-flex" method=POST action="{% url  'azubi_list'  filter='all' %}">
-    {% csrf_token %}
-    <input type="search" label="search" name="azubi_search_input">
-    <buton type="submit">Search</buton>
-  </form>
+  <header id="pageHeader">
   {{search}}</header>
 
   <nav id="mainNav">
