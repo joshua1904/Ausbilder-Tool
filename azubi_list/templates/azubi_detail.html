@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,125 +6,60 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
 </head>
 
 <style>
   body { 
     display: grid;
     grid-template-areas: 
-      "nav header"
-      "nav article"
-      "footer footer";
-    grid-template-rows: 60px 1fr 60px;
-    grid-template-columns: 20% 1fr 15%;
-    grid-gap: 10px;
-    height: 100vh;
+      "nav header header"
+      "nav head_article head_article"
+      "nav main_article main_article";
+    grid-template-rows: auto;
+    grid-template-columns: 14%;
+    grid-gap: 2px;
+    height: 100%;
     margin: 0;
     }
-  header, footer, article, nav, div {
+  header, nav, article, footer {
     padding: 20px;
-    background: gold;
+    background-color:rgba(74, 190, 190, 0.363);
   }
   #pageHeader {
     grid-area: header;
   }
-  #pageFooter {
-    grid-area: footer;
+  #mainNav { 
+    grid-area: nav;
+    overflow-y: scroll;
+    position: fixed;
+    height: 100vh;
+  }
+  #headArticle { 
+    grid-area: head_article;
   }
   #mainArticle { 
-    grid-area: article;      
-    }
-  #mainNav { 
-    grid-area: nav; 
-    }
-  #siteAds { 
-    grid-area: ads; 
-    }
+    grid-area: main_article;
+  }
+
   </style>
 
 <body>
 
   <header id="pageHeader">Header</header>
-  <article id="mainArticle">Article</article>
-  <nav id="mainNav">Nav</nav>
-  <footer id="pageFooter">Footer</footer>
 
-  <div class="row">
+  <nav id="mainNav">
+    {% include 'include/azubi_list.html' %}
+  </nav>
 
-    <div class="col-lg-2"  style="overflow-y: scroll; height: 100vh;">
-     
-      {% include 'include/azubi_list.html' %}
-
-    </div>
-    
-    <div class="col-lg-10">
-      {% include 'include/azubi_detail_view.html' %}
-    </div>
-    <div class="col-lg-8">
-       
-
-    
-        <div class="col-md-8">
-
-
-              
-              <div class="row">
-                <div class="col-sm-3">
-                  <h6 class="mb-0">Full Name</h6>
-                </div>
-                <div class="col-sm-9 text-secondary">
-                  Kenneth Valdez
-                </div>
-              </div>
-
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <h6 class="mb-0">Email</h6>
-                </div>
-                <div class="col-sm-9 text-secondary">
-                  fip@jukmuh.al
-                </div>
-              </div>
-
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <h6 class="mb-0">Phone</h6>
-                </div>
-                <div class="col-sm-9 text-secondary">
-                  (239) 816-9029
-                </div>
-              </div>
-
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <h6 class="mb-0">Mobile</h6>
-                </div>
-                <div class="col-sm-9 text-secondary">
-                  (320) 380-4539
-                </div>
-              </div>
-
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <h6 class="mb-0">Address</h6>
-                </div>
-                <div class="col-sm-9 text-secondary">
-                  Bay Area, San Francisco, CA
-                </div>
-              </div>
-
-              <hr>
-            </div>
-          </div>
-    
-    
-      </div>
-  </div>
+  <article id="headArticle">
+    {% include 'include/azubi_detail_view.html' %}
+  </article>
+  
+  <article id="mainArticle">
+    {% include 'include/detailed_informations.html' %}
+  </article>
 
 </body>
 </html>
