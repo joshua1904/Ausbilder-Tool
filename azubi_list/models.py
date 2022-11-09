@@ -17,8 +17,9 @@ class Azubi(models.Model):
     department = models.CharField(max_length=30)
     year = models.IntegerField()
     phone_number = models.CharField(max_length=30)
-
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+    class Meta:
+        ordering = ('first_name', 'last_name' )
 
 # Create your models here.
