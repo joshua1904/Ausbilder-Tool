@@ -23,7 +23,7 @@
         <td>
           <form class="d-flex" method=POST action="{% url  'azubi_list'  filter=filter %}" >
           {% csrf_token %}
-          <input type="search" label="search" name="azubi_search_input">
+          <input type="search" label="search" name="azubi_search_input" style="width: 100%;">
           <button type="submit"><image height=20 width=20  src="{% static 'images/lupe.png' %}"/></button>
             
         </form></td>

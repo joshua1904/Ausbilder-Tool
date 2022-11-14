@@ -3,6 +3,14 @@ from .models import Azubi, Profession
 from django.shortcuts import get_object_or_404, render
 from .forms import SearchForm
 import operator
+
+
+
+
+# def form_name_view(request):
+#     form = FormName()
+#     return render(request, "azubi_detail.html", {"formi":form})
+
 class failureObject():
     first_name = "Keine Treffer"
     id = 0
@@ -10,7 +18,7 @@ def detail_page(request, filter, id):
     form = SearchForm()
     obj = get_object_or_404(Azubi, pk=id)
     azubis = Azubi.objects.order_by('-last_name', "first_name")
-    azubis = sorted(azubis)
+    azubis = sort(azubis)
     professions = Profession.objects.all()
     final_list = get_filter(filter, azubis)
     return render(request, "azubi_detail.html", {"obj": obj, "azubis": final_list, "professions": professions, "filter": filter, "form": form})   
