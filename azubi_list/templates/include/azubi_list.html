@@ -9,12 +9,10 @@
                   <div class="dropdown-content">
                     <a href="{% url 'azubi_list' filter='all'  %}">Alle</a>
                     {% for profession in professions %}
-                    <a href="{% url 'azubi_list' filter=profession  %}">{{profession.name}}</a>
+                      <a href="{% url 'azubi_list' filter=profession  %}">{{profession.name}}</a>
                     {% endfor %}
                   </div>
                 </div> 
-
-
         </th>
       </tr>
     </thead>

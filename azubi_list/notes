@@ -1,0 +1,3 @@
+{% for department in departments %}
+    <a href="{% url 'azubi_list' filter=department  %}">{{department.name}}</a>
+{% endfor %}
