@@ -1,5 +1,5 @@
 {%if obj%}
-<div class="jumbotron">
+<div>
   <h1 class="display-4">{{obj.first_name}} {{obj.last_name}}</h1>
   <p class="lead"><strong>Email: </strong><a href="mailto:{{obj.email}}">{{obj.email}}</a>  <strong>Telefon Nummer: </strong>{{obj.phone_number}} <strong>Geburtstag: </strong> {{obj.birthday}}</p>
   <hr class="my-4">
@@ -7,6 +7,9 @@
   <p class="lead">
     <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
   </p>
+</div>
+<div>
+  {% include 'include/detailed_informations.html' %}
 </div>
 {%else%}
 {% include 'include/no_azubi_detail.html' %}
