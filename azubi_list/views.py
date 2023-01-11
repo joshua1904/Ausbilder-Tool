@@ -10,10 +10,9 @@ class failureObject():
     id = 0
 def detail_page(request, filter, id):
     form = SearchForm()
-    delete_form = DeleteForm()
     obj = get_object_or_404(Azubi, pk=id)
     azubis = Azubi.objects.order_by('-last_name', "first_name")
-    azubis = sort(azubis)
+    #azubis = sort(azubis)
     professions = Profession.objects.all()
     final_list = get_filter(filter, azubis)
     if request.method == "POST":
@@ -99,14 +98,13 @@ def delete_azubi(request, id):
     return homepage(request, "all")
 
 
-
 def edit_azubi_data(request, id):
     data = get_object_or_404(Azubi, pk=id)
     if request.method == 'POST':
         form = AzubiForm(request.POST, instance=data)
         if form.is_valid():
             form.save()
-            # redirect to somewhere
+            return detail_page(request, "all", id)
     else:
         form = AzubiForm(instance=data)
     return render(request, 'change_azubi_values.html', {'form': form})
