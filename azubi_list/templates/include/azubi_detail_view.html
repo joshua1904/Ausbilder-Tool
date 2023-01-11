@@ -1,8 +1,9 @@
+{%load static %}
 {%if obj%}
 <div>
+  <a  href="{% url 'deleteconfirm' obj.id%}" style="float: right;"><image class="flex" height="50" src="{% static 'images/delete.png' %}"/></a>
+  <a class="btn btn-light" href="{% url 'edit' obj.id%}" style="float: right;"><image class="flex" height="40" src="{% static 'images/edit.png' %}"/></a>
   <h1 class="display-4">{{obj.first_name}} {{obj.last_name}}</h1>
-  <a class="btn btn-danger" href="{% url 'deleteconfirm' obj.id%}" style="float: right;">Löschen</a>
-  <a class="btn btn-light" href="{% url 'edit' obj.id%}" style="float: right;">Bearbeiten</a>
   <p class="lead"><strong>Email: </strong><a href="mailto:{{obj.email}}">{{obj.email}}</a>  <strong>Telefon Nummer: </strong>{{obj.phone_number}} <strong>Geburtstag: </strong> {{obj.birthday}}</p>
     <hr class="my-4">
 </div>
