@@ -8,18 +8,19 @@
                 <div class="dropdown" style="float: right; margin-right: 20%;">
                   <button class="dropbtn">Beruf</button>
                   <div class="dropdown-content">
-                    <a href="{% url 'azubi_list' filter='all'  %}">Alle</a>
+                    <a href="{% url 'azubi_list' filter='all' year=year id=id  %}">Alle</a>
                     {% for profession in professions %}
-                    <a href="{% url 'azubi_list' filter=profession  %}">{{profession.name}}</a>
+                    <a href="{% url 'azubi_list' filter=profession year=year id=id %}">{{profession.name}}</a>
                     {% endfor %}
                   </div>
                 </div> 
                 <div class="dropdown" style="float: right; margin-right: 20%;">
                   <button class="dropbtn">Jahr</button>
                   <div class="dropdown-content">
-                    <a href="{% url 'azubi_list' filter=filter  %}">1</a>
-                    <a href="{% url 'azubi_list' filter=filter %}">2</a>
-                    <a href="{% url 'azubi_list' filter=filter %}">3</a>
+                    <a href="{% url 'azubi_list' filter=filter  year=0 id=id %}">alle</a>
+                    <a href="{% url 'azubi_list' filter=filter  year='1' id=id %}">1</a>
+                    <a href="{% url 'azubi_list' filter=filter  year='2' id=id %}">2</a>
+                    <a href="{% url 'azubi_list' filter=filter  year='3' id=id %}">3</a>
                     
                   </div>
 
@@ -30,7 +31,7 @@
     <tbody>
       <tr>
         <td>
-          <form class="d-flex" method=POST action="{% url  'azubi_list'  filter=filter %}" >
+          <form class="d-flex" method=POST action="{% url  'azubi_list'  filter=filter year=year id=0 %}" >
             {% csrf_token %}
             <input type="search" label="search" name="azubi_search_input" style="width:80%">  
             <button type="submit"><image height=auto width=20  src="{% static 'images/lupe.png' %}"/></button>
@@ -40,9 +41,9 @@
       {% for azubi in azubis %}
       <tr>
         {%if obj.id == azubi.id %}
-        <td style="background: rgba(144, 110, 184, 0.363)"><a href="{% url 'detail' filter=filter id=azubi.id %}">{{ azubi.first_name }} {{azubi.last_name}} {{azubi.topic}}  </a><a href="mailto:{{azubi.email}}"><img style="float: right", src="{% static 'images/mail.png' %}" withd=20, height= 20 alt="My image"></a></td>
+        <td style="background: rgba(144, 110, 184, 0.363)"><a href="{% url 'azubi_list' filter=filter year=year id=azubi.id %}">{{ azubi.first_name }} {{azubi.last_name}} {{azubi.topic}}  </a><a href="mailto:{{azubi.email}}"><img style="float: right", src="{% static 'images/mail.png' %}" withd=20, height= 20 alt="My image"></a></td>
         {%else%}
-        <td ><a href="{% url 'detail' filter=filter id=azubi.id %}">{{ azubi.first_name }} {{azubi.last_name}} {{azubi.topic}}  </a><a href="mailto:{{azubi.email}}"><img style="float: right", src="{% static 'images/mail.png' %}" withd=20, height= 20 alt="My image"></a></td>
+        <td ><a href="{% url 'azubi_list' filter=filter year=year id=azubi.id %}">{{ azubi.first_name }} {{azubi.last_name}} {{azubi.topic}}  </a><a href="mailto:{{azubi.email}}"><img style="float: right", src="{% static 'images/mail.png' %}" withd=20, height= 20 alt="My image"></a></td>
         {%endif%}
       </tr>
       {% endfor %}

@@ -14,7 +14,7 @@
     
     <form   method="POST" action="{% url  'deleteconfirm' azubi.id %}" >
         {% csrf_token %}
-        <a class="btn btn-success" href="{% url 'detail' filter=filter id=azubi.id%}">Nein</a>
+        <a class="btn btn-success" href="{% url 'azubi_list' filter=filter year=0 id=azubi.id%}">Nein</a>
         <input  class="btn btn-danger" type="submit" value ="Ja"></input>
       </form>
 </body>
