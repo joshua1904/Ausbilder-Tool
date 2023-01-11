@@ -1,8 +1,11 @@
 from django import forms
 from django.forms import ModelForm, TextInput, EmailInput, DateInput
-from .models import Azubi
+from .models import Azubi, Profession
 class SearchForm(forms.Form):
     search_input = forms.CharField(label='Suche', max_length=100)
+
+class DeleteForm(forms.Form):
+    hidden_input = forms.CharField(max_length=0)
 
 
 class AzubiForm(ModelForm):
@@ -47,4 +50,14 @@ class AzubiForm(ModelForm):
                 }), 
             }
            
-           
+class ProfessionForm(ModelForm):
+    class Meta:
+        model = Profession
+        fields = '__all__'
+        widgets = {
+            'name': TextInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'Beruf'
+                })
+        }

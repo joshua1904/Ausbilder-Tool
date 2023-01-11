@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from .models import Azubi, Profession
 from django.shortcuts import get_object_or_404, render
-from .forms import SearchForm, AzubiForm
+from .forms import SearchForm, AzubiForm, ProfessionForm, DeleteForm
 import operator
 
 
@@ -10,14 +10,18 @@ class failureObject():
     id = 0
 def detail_page(request, filter, id):
     form = SearchForm()
+    delete_form = DeleteForm()
     obj = get_object_or_404(Azubi, pk=id)
     azubis = Azubi.objects.order_by('-last_name', "first_name")
     azubis = sort(azubis)
     professions = Profession.objects.all()
     final_list = get_filter(filter, azubis)
     if request.method == "POST":
-        search = request.POST['azubi_search_input']
-        final_list = get_search(final_list, search)   
+        if form.is_valid():
+            search = request.POST['azubi_search_input']
+            final_list = get_search(final_list, search)   
+            #delete = request.POST['delete']
+            #return delete_confirm(request, id)
     return render(request, "azubi_detail_2.html", {"obj": obj, "azubis": final_list, "professions": professions, "filter": filter, "form": form})   
 
 #Ruft die selbe seite wie Detail page auf, braucht aber keine obj id (Vlt geht das ja aber auch besser)
@@ -28,8 +32,12 @@ def homepage(request, filter: str):
     professions = Profession.objects.all()
     final_list = get_filter(filter, azubis)
     if request.method == "POST":
-        search = request.POST['azubi_search_input']
-        final_list = get_search(final_list, search)   
+        try:
+            search = request.POST['azubi_search_input']
+            final_list = get_search(final_list, search)
+        except:
+            pass
+  
     if len(final_list) > 0:
         return render(request, "azubi_detail_2.html", {"azubis": final_list, "obj": final_list[0], "professions": professions, "filter": filter, "form": form})
     return render(request, "azubi_detail_2.html", {"azubis": azubis,"professions": professions, "filter": filter, "form": form})
@@ -58,11 +66,34 @@ def start_page(request):
 
 def add_azubi(request):
     azubi_form = AzubiForm()
-    context = {"form": azubi_form }
+    profession_form = ProfessionForm()
+    context = {"azubi_form": azubi_form, "profession_form": profession_form  }
     if request.method == "POST":
         azubi_form = AzubiForm(request.POST)
+        profession_form = ProfessionForm(request.POST)
         if azubi_form.is_valid():
             azubi_form.save()
+        elif profession_form.is_valid():
+            profession_form.save()
         else:
             print("mies")
     return render(request, "add_azubi.html", context)
+
+def delete_confirm(request, id):
+    print("hi")
+    filter = "all"
+    azubi = get_object_or_404(Azubi, pk=id)
+    context = {"azubi": azubi, "filter": filter}
+
+    if request.method == "POST":
+        print("hi_2")
+        azubi.delete()
+        return homepage(request, "all")
+    return render(request, "delete_confirm.html", context)
+
+def delete_azubi(request, id):
+    azubi = get_object_or_404(Azubi, pk=id)
+    if request.method == 'POST':
+        azubi.delete()
+
+    return homepage(request, "all")

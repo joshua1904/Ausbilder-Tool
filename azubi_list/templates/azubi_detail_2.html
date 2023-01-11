@@ -4,24 +4,30 @@
 <style>
 
 .left {
-  background: #0278c9;  
+  overflow-y: scroll;
+  height: 100%;
 }
 
 .right {
-  background: #0278c9;  
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .main-wrapper {
   height: 100vh;  
 }
+.top{
+  width: 100%;
 
+
+}
 .section {
-  height: 100%;  
+  
   display: flex;
   flex-direction: column;
   justify-content: top;
   align-items: left;
-  overflow-y: scroll;
+  
 }
 
 .half {
@@ -32,7 +38,11 @@
 }
 
 </style>
+
+
+
 <div class="main-wrapper">
+  <div class="section top">{% include 'include/header.html' %}</div>
   <div class="section left col-xs-3">
     <div class="half">{% include 'include/azubi_list.html' %}</div>
   </div>

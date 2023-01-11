@@ -1,42 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Add Azubi</h1>
+{% load static %}
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+<style>
+
+.left {
+
+  height: 100%;
+}
+
+.right {
+  height: 100%;
+}
+
+.main-wrapper {
+  height: 100vh;  
+}
+.top{
+  width: 100%;
+
+
+}
+.section {
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: left;
+  
+}
+
+.half {
+  background: #f9f9f9;
+  height: 100%;  
+  width: 100%;
+  margin: 0;
+}
+
+</style>
+
+
+
+<div class="main-wrapper">
+  <div class="section top">{% include 'include/header.html' %}</div>
+  <div class="section left col-xs-5">
+    <div class="half">
+        <h1>Azubi hinzufügen</h1>
     <form action="" method="post">
         {% csrf_token %}
         <div class="form-group">
-            {{ form.topic }}
+            {{ azubi_form.topic }}
         </div>
         <div class="form-group">
-            {{ form.first_name }}
+            {{ azubi_form.first_name }}
         </div>
         <div class="form-group">
-            {{ form.last_name }}
+            {{ azubi_form.last_name }}
         </div>
         <div class="form-group">
-            {{ form.email }}
+            {{ azubi_form.email }}
         </div>
         <div class="form-group">
-            {{ form.birthday }}
+            {{ azubi_form.birthday }}
         </div>
         <div class="form-group">
-            {{ form.department }}
+            {{ azubi_form.department }}
         </div>
         <div class="form-group">
-            {{ form.year }}
+            {{ azubi_form.year }}
         </div>
         <div class="form-group">
-            {{ form.phone_number }}
+            {{ azubi_form.phone_number }}
         </div>
         <div class="form-group">
             <input class="btn btn-primary" type="submit" value="Submit">
         </div>
     </form>
-</body>
-</html>
+    </div>
+  </div>
+  <div class="section right col-xs-5">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <h1>Berufsgruppe hinzufügen</h1>
+            {{ profession_form.name }}
+        </div>
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </div>
+    </form>
+  </div>
+</div>
