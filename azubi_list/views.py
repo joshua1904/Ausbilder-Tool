@@ -69,13 +69,10 @@ def add_azubi(request):
     context = {"azubi_form": azubi_form, "profession_form": profession_form  }
     if request.method == "POST":
         azubi_form = AzubiForm(request.POST)
-        profession_form = ProfessionForm(request.POST)
         if azubi_form.is_valid():
             azubi_form.save()
-        elif profession_form.is_valid():
-            profession_form.save()
         else:
-            print("mies")
+            print("Fehler beim Azubi Hinzufügen")
     return render(request, "add_azubi.html", context)
 
 def delete_confirm(request, id):
@@ -107,3 +104,20 @@ def edit_azubi_data(request, id):
     else:
         form = AzubiForm(instance=data)
     return render(request, 'change_azubi_values.html', {'form': form})
+
+
+def settings(request):
+    context = {}
+    return render(request, 'settings.html', context)
+
+
+def add_proffesion(request):
+    profession_form = ProfessionForm()
+    context= {"profession_form": profession_form}
+    if request.method == "POST":
+        profession_form = ProfessionForm(request.POST)
+        if profession_form.is_valid():
+            profession_form.save()
+        else:
+            print("Fehler beim Beruf Hinzufügen")
+    return render(request, "add_profession.html", context)
