@@ -4,21 +4,18 @@ from django.shortcuts import get_object_or_404, render
 from .forms import SearchForm, AzubiForm, ProfessionForm, DeleteForm
 import operator
 
-
+#wird genutzt falls keine Azubis in der Liste sind
 class failureObject():
     first_name = "Keine Treffer"
     id = 0
 
 
-#Ruft die selbe seite wie Detail page auf, braucht aber keine obj id (Vlt geht das ja aber auch besser)
 def homepage(request, filter: str, year: int, id):
     azubis = Azubi.objects.order_by("last_name")
-    #azubis = sort(azubis)
     form = SearchForm()
     professions = Profession.objects.all()
     final_list = get_filter(filter, azubis)
     final_list = get_year_filter(year, final_list)
-    print(final_list)
     if request.method == "POST":
         try:
             search = request.POST['azubi_search_input']
@@ -109,7 +106,6 @@ def edit_azubi_data(request, id):
 def settings(request):
     context = {}
     return render(request, 'settings.html', context)
-
 
 def add_proffesion(request):
     profession_form = ProfessionForm()
