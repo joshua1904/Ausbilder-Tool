@@ -8,11 +8,16 @@
     <title>Document</title>
 </head>
 <body>
+
     <div>{% include 'include/header.html' %}</div>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Save Changes">
+    <div style="margin: 1%">
+        <h1 style="margin-left: 5">Daten von {{azubi.first_name}} {{azubi.last_name}} bearbeiten</h1>
+        <form style="margin: 10" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="btn btn-success" type="submit" value="Save Changes">
+    </div>
+   
 </body>
 </html>
 

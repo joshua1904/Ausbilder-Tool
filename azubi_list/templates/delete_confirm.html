@@ -9,13 +9,15 @@
 </head>
 <body>
     <div>{% include 'include/header.html' %}</div>
+    <div style="margin: 1%">
+        <h1>Willst du wirklich {{azubi.first_name}} {{azubi.last_name}} Löschen?</h1>
     
-    <h1>Willst du wirklich {{azubi.first_name}} {{azubi.last_name}} Löschen?</h1>
-    
-    <form   method="POST" action="{% url  'deleteconfirm' azubi.id %}" >
-        {% csrf_token %}
-        <a class="btn btn-success" href="{% url 'azubi_list' filter=filter year=0 id=azubi.id%}">Nein</a>
-        <input  class="btn btn-danger" type="submit" value ="Ja"></input>
-      </form>
+        <form   method="POST" action="{% url  'deleteconfirm' azubi.id %}" >
+            {% csrf_token %}
+            <a class="btn btn-success" href="{% url 'azubi_list' filter=filter year=0 id=azubi.id%}">Nein</a>
+            <input  class="btn btn-danger" type="submit" value ="Ja"></input>
+          </form>
+    </div>
+   
 </body>
 </html>

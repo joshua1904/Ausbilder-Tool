@@ -31,7 +31,7 @@ class AzubiForm(ModelForm):
             'birthday': DateInput(attrs={
                 'class': "form-control",
                 'style': 'max-width: 300px;',
-                'placeholder': 'Geburtstag'
+                'placeholder': 'Geburtstag(YYYY-MM-DD)'
                 }), 
             'department': TextInput(attrs={
                 'class': "form-control",

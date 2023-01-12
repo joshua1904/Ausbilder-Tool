@@ -3,7 +3,7 @@ from .models import Azubi, Profession
 from django.shortcuts import get_object_or_404, render
 from .forms import SearchForm, AzubiForm, ProfessionForm, DeleteForm
 import operator
-
+from .scripts import change_training_year_if_neccessary
 #wird genutzt falls keine Azubis in der Liste sind
 class failureObject():
     first_name = "Keine Treffer"
@@ -11,6 +11,7 @@ class failureObject():
 
 
 def homepage(request, filter: str, year: int, id):
+    change_training_year_if_neccessary()
     azubis = Azubi.objects.order_by("last_name")
     form = SearchForm()
     professions = Profession.objects.all()
@@ -85,6 +86,7 @@ def delete_confirm(request, id):
 
 def delete_azubi(request, id):
     azubi = get_object_or_404(Azubi, pk=id)
+    
     if request.method == 'POST':
         azubi.delete()
 
@@ -92,15 +94,17 @@ def delete_azubi(request, id):
 
 
 def edit_azubi_data(request, id):
-    data = get_object_or_404(Azubi, pk=id)
+    azubi = get_object_or_404(Azubi, pk=id)
     if request.method == 'POST':
-        form = AzubiForm(request.POST, instance=data)
+        form = AzubiForm(request.POST, instance=azubi)
         if form.is_valid():
             form.save()
             return homepage(request, "all", 0, id)
     else:
-        form = AzubiForm(instance=data)
-    return render(request, 'change_azubi_values.html', {'form': form})
+        form = AzubiForm(instance=azubi)
+
+    context = {"azubi": azubi, "form": form}
+    return render(request, 'change_azubi_values.html', context)
 
 
 def settings(request):

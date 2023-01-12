@@ -5,8 +5,8 @@
       <tr>
         <th scope="col">Azubis 
             
-                <div class="dropdown" style="float: right; margin-right: 20%;">
-                  <button class="dropbtn">Beruf</button>
+                <div class="dropdown" style="float: right; margin-right: 1; height: auto; width: 35%;">
+                  <button class="dropbtn" style="width: 100%">Beruf</button>
                   <div class="dropdown-content">
                     <a href="{% url 'azubi_list' filter='all' year=year id=id  %}">Alle</a>
                     {% for profession in professions %}
@@ -14,8 +14,8 @@
                     {% endfor %}
                   </div>
                 </div> 
-                <div class="dropdown" style="float: right; margin-right: 1%;">
-                  <button class="dropbtn">Jahr</button>
+                <div class="dropdown"  style="float: right; margin-right: 1%; height: auto; width: 35%;">
+                  <button  style="width: 100%"class="dropbtn">Jahr</button>
                   <div class="dropdown-content">
                     <a href="{% url 'azubi_list' filter=filter  year=0 id=id %}">alle</a>
                     <a href="{% url 'azubi_list' filter=filter  year='1' id=id %}">1</a>
