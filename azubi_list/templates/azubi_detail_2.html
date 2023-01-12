@@ -1,0 +1,52 @@
+{% load static %}
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+<style>
+
+.left {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.right {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.main-wrapper {
+  height: 100vh;  
+}
+.top{
+  width: 100%;
+
+
+}
+.section {
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: left;
+  
+}
+
+.half {
+  background: #f9f9f9;
+  height: 100%;  
+  width: 100%;
+  margin: 0;
+}
+
+</style>
+
+
+
+<div class="main-wrapper">
+  <div class="section top">{% include 'include/header.html' %}</div>
+  <div class="section left col-xs-3">
+    <div class="half">{% include 'include/azubi_list.html' %}</div>
+  </div>
+  <div class="section right col-xs-9">
+    {% include 'include/azubi_detail_view.html' %}
+  </div>
+</div>

@@ -23,4 +23,7 @@ class Azubi(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
-# Create your models here.
+class DayCheck(models.Model):
+    day = models.DateField()
+    changed =models.IntegerField()
+

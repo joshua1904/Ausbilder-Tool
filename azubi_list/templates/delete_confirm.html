@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div>{% include 'include/header.html' %}</div>
+    <div style="margin: 1%">
+        <h1>Willst du wirklich {{azubi.first_name}} {{azubi.last_name}} Löschen?</h1>
+    
+        <form   method="POST" action="{% url  'deleteconfirm' azubi.id %}" >
+            {% csrf_token %}
+            <a class="btn btn-success" href="{% url 'azubi_list' filter=filter year=0 id=azubi.id%}">Nein</a>
+            <input  class="btn btn-danger" type="submit" value ="Ja"></input>
+          </form>
+    </div>
+   
+</body>
+</html>

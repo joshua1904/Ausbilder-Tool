@@ -18,7 +18,7 @@
       "nav head_article head_article"
       "nav main_article main_article";
     grid-template-rows: auto;
-    grid-template-columns: 12%;
+    grid-template-columns: 14%;
     grid-gap: 2px;
     height: 100%;
     margin: 0;
@@ -35,6 +35,8 @@
     overflow-y: scroll;
     position: fixed;
     height: 100vh;
+    width: 14;
+
   }
   #headArticle { 
     grid-area: head_article;
@@ -48,10 +50,10 @@
 <body>
 
   <header id="pageHeader">
-  {{search}}</header>
+  {% include 'include/header.html' %}</header>
 
   <nav id="mainNav">
-    {% include 'include/azubi_list.html' %}
+    {% include 'include/azubi_list.html' %} 
   </nav>
 
   <article id="headArticle">
@@ -63,4 +65,6 @@
   </article>
 
 </body>
+
+
 </html>
