@@ -1,5 +1,6 @@
 import datetime
 from .models import Azubi, DayCheck
+
 def get_day() -> datetime.datetime:
     return datetime.date.today()
 
@@ -21,6 +22,7 @@ def is_day_already_checked():
         daycheck = DayCheck.objects.all()[0]
     else:
         daycheck = DayCheck(day= get_day(), changed= 0)
+        daycheck.save()
     if daycheck.day != get_day():
         daycheck.day = get_day()
         daycheck.changed = 1
@@ -34,3 +36,4 @@ def change_training_year_of_all():
     for azubi in azubis:
         azubi.year += 1
         azubi.save()
+
