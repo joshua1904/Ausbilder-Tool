@@ -1,6 +1,10 @@
 from django import forms
-from django.forms import ModelForm, TextInput, EmailInput, DateInput
+from django.forms import ModelForm, TextInput, EmailInput, DateInput, SelectDateWidget
 from .models import Azubi, Profession
+
+
+class FormDateInput(forms.DateInput):
+    input_type = 'date'
 class SearchForm(forms.Form):
     search_input = forms.CharField(label='Suche', max_length=100)
 
@@ -28,7 +32,7 @@ class AzubiForm(ModelForm):
                 'style': 'max-width: 300px;',
                 'placeholder': 'Email'
                 }), 
-            'birthday': DateInput(attrs={
+            'birthday': FormDateInput( attrs={
                 'class': "form-control",
                 'style': 'max-width: 300px;',
                 'placeholder': 'Geburtstag(YYYY-MM-DD)'
