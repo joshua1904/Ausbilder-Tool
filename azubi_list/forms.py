@@ -36,6 +36,16 @@ class AzubiForm(ModelForm):
                 'class': "form-control",
                 'style': 'max-width: 300px;',
                 'placeholder': 'Geburtstag(YYYY-MM-DD)'
+                }),
+            'address': TextInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'Addresse'
+                }), 
+             'PLZ': TextInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 300px;',
+                'placeholder': 'PLZ'
                 }), 
             'department': TextInput(attrs={
                 'class': "form-control",

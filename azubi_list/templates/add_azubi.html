@@ -47,30 +47,7 @@
         <h1>Azubi hinzufügen</h1>
     <form action="" method="post">
         {% csrf_token %}
-        <div class="form-group">
-            {{ azubi_form.topic }}
-        </div>
-        <div class="form-group">
-            {{ azubi_form.first_name }}
-        </div>
-        <div class="form-group">
-            {{ azubi_form.last_name }}
-        </div>
-        <div class="form-group">
-            {{ azubi_form.email }}
-        </div>
-        <div class="form-group">
-            {{ azubi_form.birthday }}
-        </div>
-        <div class="form-group">
-            {{ azubi_form.department }}
-        </div>
-        <div class="form-group">
-            {{ azubi_form.year }}
-        </div>
-        <div class="form-group">
-            {{ azubi_form.phone_number }}
-        </div>
+        {{ azubi_form.as_p }}
         <div class="form-group">
             <input class="btn btn-primary" type="submit" value="Submit">
         </div>

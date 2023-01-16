@@ -70,7 +70,6 @@ def add_azubi(request):
     if not request.user.is_authenticated:
         return redirect("/login/")
     azubi_form = AzubiForm()
-    profession_form = ProfessionForm()
     context = {"azubi_form": azubi_form  }
     if request.method == "POST":
         azubi_form = AzubiForm(request.POST)
