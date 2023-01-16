@@ -1,9 +1,12 @@
-from django.shortcuts import render, HttpResponseRedirect, HttpResponse
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse, redirect
 from .models import Azubi, Profession
 from django.shortcuts import get_object_or_404, render
 from .forms import SearchForm, AzubiForm, ProfessionForm, DeleteForm
 import operator
 from .scripts import change_training_year_if_neccessary
+from django.contrib.auth.views import LoginView
+from django.contrib.auth import logout
+
 #wird genutzt falls keine Azubis in der Liste sind
 class failureObject():
     first_name = "Keine Treffer"
@@ -11,6 +14,8 @@ class failureObject():
 
 
 def homepage(request, filter: str, year: int, id):
+    if not request.user.is_authenticated:
+        return redirect("/login/")
     change_training_year_if_neccessary()
     azubis = Azubi.objects.order_by("last_name")
     form = SearchForm()
@@ -62,9 +67,10 @@ def start_page(request):
 
 
 def add_azubi(request):
+    if not request.user.is_authenticated:
+        return redirect("/login/")
     azubi_form = AzubiForm()
-    profession_form = ProfessionForm()
-    context = {"azubi_form": azubi_form, "profession_form": profession_form  }
+    context = {"azubi_form": azubi_form  }
     if request.method == "POST":
         azubi_form = AzubiForm(request.POST)
         if azubi_form.is_valid():
@@ -74,6 +80,8 @@ def add_azubi(request):
     return render(request, "add_azubi.html", context)
 
 def delete_confirm(request, id):
+    if not request.user.is_authenticated:
+        return redirect("/login/")
     filter = "all"
     azubi = get_object_or_404(Azubi, pk=id)
     context = {"azubi": azubi, "filter": filter}
@@ -85,6 +93,8 @@ def delete_confirm(request, id):
     return render(request, "delete_confirm.html", context)
 
 def delete_azubi(request, id):
+    if not request.user.is_authenticated:
+        return redirect("/login/")
     azubi = get_object_or_404(Azubi, pk=id)
     
     if request.method == 'POST':
@@ -94,6 +104,8 @@ def delete_azubi(request, id):
 
 
 def edit_azubi_data(request, id):
+    if not request.user.is_authenticated:
+        return redirect("/login/")
     azubi = get_object_or_404(Azubi, pk=id)
     if request.method == 'POST':
         form = AzubiForm(request.POST, instance=azubi)
@@ -108,10 +120,14 @@ def edit_azubi_data(request, id):
 
 
 def settings(request):
+    if not request.user.is_authenticated:
+        return redirect("/login/")
     context = {}
     return render(request, 'settings.html', context)
 
 def add_proffesion(request):
+    if not request.user.is_authenticated:
+        return redirect("/login/")
     profession_form = ProfessionForm()
     context= {"profession_form": profession_form}
     if request.method == "POST":
@@ -121,3 +137,13 @@ def add_proffesion(request):
         else:
             print("Fehler beim Beruf Hinzufügen")
     return render(request, "add_profession.html", context)
+
+def login_required(request):
+    return render(request, "login_required.html", {})
+
+
+
+def logout_view(request):
+    logout(request)
+    return login_required(request)
+    
