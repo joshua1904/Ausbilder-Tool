@@ -3,7 +3,7 @@ from .models import Azubi, Profession
 from django.shortcuts import get_object_or_404, render
 from .forms import SearchForm, AzubiForm, ProfessionForm, DeleteForm
 import operator
-from .scripts import change_training_year_if_neccessary
+from .scripts import change_training_year_if_neccessary, sort_azubis
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
 
@@ -14,10 +14,12 @@ class failureObject():
 
 
 def homepage(request, filter: str, year: int, id):
+
     if not request.user.is_authenticated:
         return redirect("/login/")
     change_training_year_if_neccessary()
     azubis = Azubi.objects.order_by("last_name")
+    print(sort_azubis(azubis))
     form = SearchForm()
     professions = Profession.objects.all()
     final_list = get_filter(filter, azubis)

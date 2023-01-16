@@ -1,6 +1,7 @@
 import datetime
 from .models import Azubi, DayCheck
 
+############## funktionen für Datumsabfrage ##############
 def get_day() -> datetime.datetime:
     return datetime.date.today()
 
@@ -36,4 +37,30 @@ def change_training_year_of_all():
     for azubi in azubis:
         azubi.year += 1
         azubi.save()
+############## funktionen für Datumsabfrage ##############
+
+
+############## funktionen für Sortieren ##############
+
+def get_position(char: str):
+    """gibt die alphabet nummer von einem char an (nur kleinbuchstaben)"""
+    return ord(char)- 97 
+
+def sort_azubis(azubi_list: list): 
+    solution_list = []   
+    sorted_list_by_last_name =  sorted(azubi_list, key=lambda azubi: azubi.last_name)
+    sorted_list_by_alphabet = list()
+    for i in range(26):
+        sorted_list_by_alphabet.append([])
+    for azubi in sorted_list_by_last_name:
+        sorted_list_by_alphabet[get_position(azubi.last_name.lower()[0])]
+    
+    for azubi_list in sorted_list_by_alphabet:
+        solution_list += sorted(azubi_list, key= lambda azubi: azubi.first_name)
+    
+    return solution_list
+
+
+############## funktionen für Sortieren ##############
+
 
