@@ -3,9 +3,10 @@ from .models import Azubi, Profession
 from django.shortcuts import get_object_or_404, render
 from .forms import SearchForm, AzubiForm, ProfessionForm, DeleteForm
 import operator
-from .scripts import change_training_year_if_neccessary, sort_azubis
+from .scripts import change_training_year_if_neccessary
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import logout
+from django.contrib import messages
 
 #wird genutzt falls keine Azubis in der Liste sind
 class failureObject():
@@ -14,12 +15,11 @@ class failureObject():
 
 
 def homepage(request, filter: str, year: int, id):
-
+    
     if not request.user.is_authenticated:
         return redirect("/login/")
     change_training_year_if_neccessary()
     azubis = Azubi.objects.order_by("last_name")
-    print(sort_azubis(azubis))
     form = SearchForm()
     professions = Profession.objects.all()
     final_list = get_filter(filter, azubis)
@@ -76,8 +76,10 @@ def add_azubi(request):
     if request.method == "POST":
         azubi_form = AzubiForm(request.POST)
         if azubi_form.is_valid():
+            messages.success(request, "Azubi erfolgreich Hinzugefügt")
             azubi_form.save()
         else:
+            messages.error(request, "Haööö")
             print("Fehler beim Azubi Hinzufügen")
     return render(request, "add_azubi.html", context)
 
@@ -89,9 +91,8 @@ def delete_confirm(request, id):
     context = {"azubi": azubi, "filter": filter}
 
     if request.method == "POST":
-        print("hi_2")
         azubi.delete()
-        return homepage(request, "all", 0, 0)
+        return redirect("/")
     return render(request, "delete_confirm.html", context)
 
 def delete_azubi(request, id):
@@ -100,6 +101,7 @@ def delete_azubi(request, id):
     azubi = get_object_or_404(Azubi, pk=id)
     
     if request.method == 'POST':
+        messages.success(request, "ksjdfh")
         azubi.delete()
 
     return homepage(request, "all", 0, 0)
@@ -112,8 +114,9 @@ def edit_azubi_data(request, id):
     if request.method == 'POST':
         form = AzubiForm(request.POST, instance=azubi)
         if form.is_valid():
+            messages.success(request, "Azubi erfolgreich bearbeitet")
             form.save()
-            return homepage(request, "all", 0, id)
+            return redirect("/")
     else:
         form = AzubiForm(instance=azubi)
 
@@ -135,6 +138,7 @@ def add_proffesion(request):
     if request.method == "POST":
         profession_form = ProfessionForm(request.POST)
         if profession_form.is_valid():
+            messages.success(request, "Berufsgruppe erfolgreich Hinzugefügt")
             profession_form.save()
         else:
             print("Fehler beim Beruf Hinzufügen")

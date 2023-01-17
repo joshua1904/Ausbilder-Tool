@@ -41,12 +41,17 @@ def change_training_year_of_all():
 
 
 ############## funktionen für Sortieren ##############
+def sort_azubi_2(azubis):
+    azubis = list(azubis)
+    azubis.sort(key = lambda azubi: (azubi.first_name, azubi.last_name))
+    print(azubis)
 
 def get_position(char: str):
     """gibt die alphabet nummer von einem char an (nur kleinbuchstaben)"""
     return ord(char)- 97 
 
 def sort_azubis(azubi_list: list): 
+    print(sort_azubi_2(azubi_list))
     solution_list = []   
     sorted_list_by_last_name =  sorted(azubi_list, key=lambda azubi: azubi.last_name)
     sorted_list_by_alphabet = list()
