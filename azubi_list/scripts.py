@@ -7,9 +7,9 @@ def get_day() -> datetime.datetime:
 
 # Gibt zurück ob der 01.09. ist
 def is_new_training_year() -> bool:
-    is_day_already_checked()
     today = get_day()
-    if today == datetime.date(today.year, 9, 1):
+    new_training_year =  datetime.date(today.year, 9, 1)
+    if today == new_training_year or today > new_training_year:
         return True
     return False
 
@@ -19,6 +19,7 @@ def change_training_year_if_neccessary():
 
 
 def is_day_already_checked():
+    print("js,nf")
     if len(list(DayCheck.objects.all())) > 0:
         daycheck = DayCheck.objects.all()[0]
     else:
